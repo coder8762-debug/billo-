@@ -1,18 +1,16 @@
-BILLO AI — Cloudflare Worker starter
+BILLO AI — Cloudflare Worker + static interface
 
-1. Upload this folder/project to a GitHub repository or use Cloudflare Workers & Pages dashboard to deploy.
-2. For Wrangler CLI deployment:
-   npm install -g wrangler
-   wrangler login
-   wrangler deploy
-3. Add your Gemini API key as a Worker secret:
-   wrangler secret put GEMINI_API_KEY
-   (paste the key into terminal prompt; do not place it in index.html)
-4. Deploy/redeploy. Open your Worker URL.
+UPDATED MODEL: gemini-3.8-flash through Google's Interactions API.
 
-Notes:
-- Chat responses use Gemini 2.5 Flash via a Worker-side proxy.
-- Voice input uses browser SpeechRecognition (Chrome recommended).
-- Spoken output uses browser SpeechSynthesis voices; these are not Gemini's Live native voices.
-- If voice recognition doesn't work, type in the chat.
-- Local static preview won't have /api/chat unless the Worker is running.
+Deploy without Linux (browser-only):
+1. Upload these project files to a GitHub repository, at its root.
+2. In Cloudflare dashboard, Workers & Pages > Create > Connect to Git.
+3. Choose this repository. For Wrangler projects, use the Cloudflare Git integration/build settings to deploy with Wrangler; this project has wrangler.toml.
+4. Once the Worker is deployed, open Worker > Settings > Variables and Secrets.
+5. Add a secret named GEMINI_API_KEY and paste your Google AI Studio key.
+6. Redeploy and open the Worker URL (not the local index.html preview).
+
+The chat backend calls POST https://generativelanguage.googleapis.com/v1beta/interactions
+using model gemini-3.8-flash and store=false. API key remains in Cloudflare secret.
+
+Voice recognition and speech output use browser APIs (Chrome recommended). This is not Gemini Live speech-to-speech; the avatar mouth animation is approximate.
