@@ -1,0 +1,4 @@
+name = "billo-ai"
+main = "worker.js"
+compatibility_date = "2026-11-25"
+assets = { directory = "./", binding = "ASSETS", not_found_handling = "single-page-application" }
